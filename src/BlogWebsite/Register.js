@@ -1,164 +1,137 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'; // For navigation in React Router
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
-export default function Register() {
-  const [activeTab, setActiveTab] = useState('personal');
+const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    username: '',
-    password: '',
-    confirmPassword: '',
-    interests: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    interests: "",
   });
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setErrors({ ...errors, [name]: "" });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle registration logic here
-    console.log('Registration submitted:', formData);
+
+    const { confirmPassword, ...userData } = formData;
+
+    if (formData.password !== formData.confirmPassword) {
+      setErrors({ confirmPassword: "Passwords do not match." });
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const isUserExists = users.some((user) => user.username === userData.username);
+
+    if (isUserExists) {
+      setErrors({ username: "Username already exists." });
+      return;
+    }
+
+    localStorage.setItem("users", JSON.stringify([...users, userData]));
+    alert("Registration successful!");
+    navigate("/login");
   };
 
   return (
-    <div className="register">
-      <h2 className="mb-4">Register</h2>
-      <ul className="nav nav-tabs mb-3">
-        <li className="nav-item">
-          <button
-            className={`nav-link ${activeTab === 'personal' ? 'active' : ''}`}
-            onClick={() => setActiveTab('personal')}
-          >
-            Personal Information
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className={`nav-link ${activeTab === 'contact' ? 'active' : ''}`}
-            onClick={() => setActiveTab('contact')}
-          >
-            Contact Information
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className={`nav-link ${activeTab === 'account' ? 'active' : ''}`}
-            onClick={() => setActiveTab('account')}
-          >
-            Account Information
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className={`nav-link ${activeTab === 'additional' ? 'active' : ''}`}
-            onClick={() => setActiveTab('additional')}
-          >
-            Additional Details
-          </button>
-        </li>
-      </ul>
-      <form onSubmit={handleSubmit}>
-        {activeTab === 'personal' && (
-          <div>
-            <div className="mb-3">
-              <label htmlFor="firstName" className="form-label">First Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="firstName"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="lastName" className="form-label">Last Name</label>
-              <input
-                type="text"
-                className="form-control"
-                id="lastName"
-                name="lastName"
-                value={formData.lastName}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
+    <div className="container text-center my-5">
+      <div className="card mx-auto" style={{ maxWidth: "400px", padding: "20px" }}>
+        <h2 className="mb-4">Register</h2>
+        <form onSubmit={handleSubmit} className="text-start">
+          <div className="mb-3">
+            <label htmlFor="firstName" className="form-label">First Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="firstName"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              required
+            />
           </div>
-        )}
-        {activeTab === 'contact' && (
-          <div>
-            <div className="mb-3">
-              <label htmlFor="email" className="form-label">Email</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="phone" className="form-label">Phone</label>
-              <input
-                type="tel"
-                className="form-control"
-                id="phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-              />
-            </div>
+          <div className="mb-3">
+            <label htmlFor="lastName" className="form-label">Last Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="lastName"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              required
+            />
           </div>
-        )}
-        {activeTab === 'account' && (
-          <div>
-            <div className="mb-3">
-              <label htmlFor="username" className="form-label">Username</label>
-              <input
-                type="text"
-                className="form-control"
-                id="username"
-                name="username"
-                value={formData.username}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="password" className="form-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-              <input
-                type="password"
-                className="form-control"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              required
+            />
           </div>
-        )}
-        {activeTab === 'additional' && (
+          <div className="mb-3">
+            <label htmlFor="phone" className="form-label">Phone</label>
+            <input
+              type="tel"
+              className="form-control"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">Username</label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="confirmPassword"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
           <div className="mb-3">
             <label htmlFor="interests" className="form-label">Interests</label>
             <textarea
@@ -169,12 +142,16 @@ export default function Register() {
               onChange={handleInputChange}
             ></textarea>
           </div>
-        )}
-        <button type="submit" className="btn btn-primary">Register</button>
-      </form>
-      <p className="mt-3">
-        Already have an account? <Link to="/login">Login here</Link>
-      </p>
+          <button type="submit" className="btn btn-primary w-100 mb-3">
+            Register
+          </button>
+        </form>
+        <p className="text-muted">
+          Already have an account? <Link to="/login">Login here</Link>
+        </p>
+      </div>
     </div>
   );
-}
+};
+
+export default Register;

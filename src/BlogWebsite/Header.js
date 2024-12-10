@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';  // Use React Router's Link component for navigation
+import { NavLink } from "react-router-dom";
 
-export default function Header() {
+export default function Header({ isAuthenticated, onLogout }) {
   return (
-    <header className="bg-light py-3">
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light">
-          <Link to="/" className="navbar-brand">
-            <img src="/logo.png" alt="Blog Logo" width={50} height={50} />
-          </Link>
+    <header>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div className="container">
+          <NavLink to="/" className="navbar-brand">
+            My Blog
+          </NavLink>
           <button
             className="navbar-toggler"
             type="button"
@@ -22,24 +22,65 @@ export default function Header() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link to="/" className="nav-link">Home</Link>
+                <NavLink to="/" className="nav-link">
+                  Home
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/blog" className="nav-link">Blog</Link>
+                <NavLink to="/blog" className="nav-link">
+                  Blog
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/about" className="nav-link">About</Link>
+                <NavLink to="/about" className="nav-link">
+                  About
+                </NavLink>
               </li>
               <li className="nav-item">
-                <Link to="/contact" className="nav-link">Contact</Link>
+                <NavLink to="/contact" className="nav-link">
+                  Contact
+                </NavLink>
               </li>
-              <li className="nav-item">
-                <Link to="/login" className="nav-link">Login</Link>
-              </li>
+              {isAuthenticated ? (
+                <>
+                  <li className="nav-item">
+                    <NavLink to="/profile" className="nav-link">
+                      Profile
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="btn btn-link nav-link"
+                      onClick={onLogout}
+                      style={{
+                        padding: 0,
+                        border: "none",
+                        background: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      Log Out
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <NavLink to="/login" className="nav-link">
+                      Login
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink to="/register" className="nav-link">
+                      Register
+                    </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
-        </nav>
-      </div>
+        </div>
+      </nav>
     </header>
-  )
+  );
 }

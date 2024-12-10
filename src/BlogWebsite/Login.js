@@ -1,73 +1,74 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';  // React Router Link for navigation
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 
-export default function Login() {
-  const [formData, setFormData] = useState({ email: '', password: '' });
-  const [errors, setErrors] = useState({ email: '', password: '' });
+const Login = ({ setCurrentUser }) => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [error, setError] = useState("");
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    setErrors({ ...errors, [name]: '' }); // Reset error message on change
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setError("");
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    let newErrors = { email: '', password: '' };
 
-    // Validation checks
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    }
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    }
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(
+      (u) => u.username === formData.username && u.password === formData.password
+    );
 
-    if (newErrors.email || newErrors.password) {
-      setErrors(newErrors); // Show errors
+    if (user) {
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      setCurrentUser(user);
+      navigate("/profile");
     } else {
-      // Handle login logic here
-      console.log('Login submitted:', formData);
+      setError("Invalid username or password.");
     }
   };
 
   return (
-    <div className="login">
-      <h2 className="mb-4">Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="email" className="form-label">Email address</label>
-          <input
-            type="email"
-            className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            required
-          />
-          {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-        </div>
-        <div className="mb-3">
-          <label htmlFor="password" className="form-label">Password</label>
-          <input
-            type="password"
-            className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleInputChange}
-            required
-          />
-          {errors.password && <div className="invalid-feedback">{errors.password}</div>}
-        </div>
-        <button type="submit" className="btn btn-primary">Login</button>
-      </form>
-      <p className="mt-3">
-        Don't have an account? <Link to="/register">Register here</Link>
-      </p>
+    <div className="container text-center my-5">
+      <div className="card mx-auto" style={{ maxWidth: "400px", padding: "20px" }}>
+        <h2 className="mb-4">Login</h2>
+        <form onSubmit={handleSubmit} className="text-start">
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label">Username</label>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="password" className="form-label">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          {error && <div className="text-danger mb-3">{error}</div>}
+          <button type="submit" className="btn btn-primary w-100 mb-3">
+            Login
+          </button>
+        </form>
+        <p className="text-muted">
+          Don't have an account? <Link to="/register">Register here</Link>
+        </p>
+      </div>
     </div>
   );
-}
+};
+
+export default Login;
