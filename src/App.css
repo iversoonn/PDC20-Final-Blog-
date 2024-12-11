@@ -3,7 +3,8 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f8f9fa; /* Light gray background */
+  background-color: #f8f9fa;
+  /* Light gray background */
 }
 
 .container {
@@ -17,9 +18,12 @@ body {
 header {
   position: sticky;
   top: 0;
-  z-index: 1000; /* Ensure it stays on top of other content */
-  background-color: #007bff; /* Match your navbar color */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional for a subtle shadow */
+  z-index: 1000;
+  /* Ensure it stays on top of other content */
+  background-color: #007bff;
+  /* Match your navbar color */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Optional for a subtle shadow */
 }
 
 header .container {
@@ -103,6 +107,7 @@ header .navbar-toggler {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }

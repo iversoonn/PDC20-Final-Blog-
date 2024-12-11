@@ -1,0 +1,231 @@
+.home {
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.btn {
+    border-radius: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.display-4 {
+    color: #ff5722;
+}
+
+hr {
+    border-top: 2px solid #ff5722;
+}
+
+.header-section {
+    position: relative;
+    width: 99vw;
+    height: 600px;
+    background: url('bg.jpeg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    margin: 0 auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.header-section h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.header-section p {
+    font-size: 1.5rem;
+}
+
+/* Top Bar Styling */
+.top-bar {
+    /* background-color: #fbe8d3; */
+    /* Light peach color */
+    padding: 10px 0;
+    font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #333;
+    /* Text color */
+    /* Optional border */
+}
+
+.top-bar-text {
+    font-family: 'Courier';
+}
+
+.little-things {
+    background-color: #fff;
+    padding: 20px 0;
+    font-family: 'COurier', serif;
+}
+
+.little-things-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+/* Cards Section */
+.card-section {
+    font-family: 'Georgia', serif;
+}
+
+.custom-card {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.2);
+}
+
+.custom-card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.custom-card-content {
+    padding: 20px;
+    background-color: #fbe8d3;
+    /* Light peach color for background */
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.custom-card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.custom-card p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.divider {
+    display: block;
+    margin: 10px auto;
+    width: 50px;
+    height: 2px;
+    background-color: #000;
+}
+
+/* Carousel Styling */
+.carousel-inner img {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Styling */
+.modal-content {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.modal-body img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    /* Dark background with transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+.modal-fullscreen {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-body img {
+    width: 100%;
+    height: auto;
+    max-height: 100vh;
+    object-fit: contain;
+    /* Ensure the image is fully visible */
+    border-radius: 0;
+    /* Remove rounded corners for fullscreen */
+}
+
+.modal-content {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}

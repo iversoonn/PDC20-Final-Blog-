@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import "../Auth.css";
 
 const Login = ({ setCurrentUser }) => {
   const navigate = useNavigate();
@@ -30,42 +31,45 @@ const Login = ({ setCurrentUser }) => {
   };
 
   return (
-    <div className="container text-center my-5">
-      <div className="card mx-auto" style={{ maxWidth: "400px", padding: "20px" }}>
-        <h2 className="mb-4">Login</h2>
-        <form onSubmit={handleSubmit} className="text-start">
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
-            <input
-              type="text"
-              className="form-control"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              required
-            />
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-form">
+          <h2>Member Login</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleInputChange}
+                placeholder="Type Your Username"
+                required
+              />
+            </div>
+            <div className="input-group">
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+                placeholder="Type Your Password"
+                required
+              />
+            </div>
+            {error && <p className="error-message">{error}</p>}
+            <button type="submit" className="auth-btn">
+              Login
+            </button>
+          </form>
+          <div className="auth-links">
+            <Link to="/forgot-password">Forgot Password?</Link>
+            <Link to="/register">Register</Link>
           </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          {error && <div className="text-danger mb-3">{error}</div>}
-          <button type="submit" className="btn btn-primary w-100 mb-3">
-            Login
-          </button>
-        </form>
-        <p className="text-muted">
-          Don't have an account? <Link to="/register">Register here</Link>
-        </p>
+        </div>
+        <div className="auth-image">
+          <h2>Quick Service Restaurant</h2>
+          <p>Your Perfect Place to Taste Delicious Food</p>
+        </div>
       </div>
     </div>
   );

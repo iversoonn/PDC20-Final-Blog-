@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../Profile.css"; // Link to the new CSS file
 
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -30,43 +31,35 @@ const Profile = () => {
   };
 
   if (!currentUser.username) {
-    return <div className="text-center my-5">You need to log in first!</div>;
+    return <div className="text-center profile-message">You need to log in first!</div>;
   }
 
   return (
-    <div className="container text-center">
-      <h2>Your Profile</h2>
-      <div>
-        {profilePic ? (
-          <img
-            src={profilePic}
-            alt="Profile"
-            style={{
-              width: "150px",
-              height: "150px",
-              borderRadius: "50%",
-              objectFit: "cover",
-            }}
+    <div className="profile-container">
+      <div className="profile-card">
+        <div className="profile-picture-section">
+          {profilePic ? (
+            <img src={profilePic} alt="Profile" className="profile-picture" />
+          ) : (
+            <div className="profile-placeholder">No Profile Picture</div>
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleProfilePicUpload}
+            className="upload-input"
           />
-        ) : (
-          <p>No profile picture</p>
-        )}
+        </div>
+        <div className="profile-details">
+          <h2>{currentUser.firstName} {currentUser.lastName}</h2>
+          <div className="profile-info">
+            <p><strong>Email:</strong> {currentUser.email || "N/A"}</p>
+            <p><strong>Phone:</strong> {currentUser.phone || "N/A"}</p>
+            <p><strong>Username:</strong> {currentUser.username || "N/A"}</p>
+            <p><strong>Interests:</strong> {currentUser.interests || "N/A"}</p>
+          </div>
+        </div>
       </div>
-      <div className="my-3">
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleProfilePicUpload}
-          className="form-control"
-          style={{ maxWidth: "400px", margin: "0 auto" }}
-        />
-      </div>
-      <p><strong>First Name:</strong> {currentUser.firstName || "N/A"}</p>
-      <p><strong>Last Name:</strong> {currentUser.lastName || "N/A"}</p>
-      <p><strong>Email:</strong> {currentUser.email || "N/A"}</p>
-      <p><strong>Phone:</strong> {currentUser.phone || "N/A"}</p>
-      <p><strong>Username:</strong> {currentUser.username || "N/A"}</p>
-      <p><strong>Interests:</strong> {currentUser.interests || "N/A"}</p>
     </div>
   );
 };

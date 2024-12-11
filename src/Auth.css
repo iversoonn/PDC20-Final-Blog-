@@ -1,0 +1,120 @@
+/* General Auth Container */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f9f9f9;
+    font-family: "Arial", sans-serif;
+}
+
+.auth-card {
+    display: flex;
+    width: 80%;
+    max-width: 1000px;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-form h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.auth-btn {
+    background-color: #d9534f;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.auth-btn:hover {
+    background-color: #c9302c;
+}
+
+.auth-links {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.auth-links a {
+    color: #d9534f;
+    text-decoration: none;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Image Section */
+.auth-image {
+    flex: 1;
+    background: url("https://images.pexels.com/photos/28000543/pexels-photo-28000543/free-photo-of-a-plate-topped-with-pancakes-fruit-and-whipped-cream.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load") no-repeat center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.auth-image h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.auth-image p {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .auth-card {
+        flex-direction: column;
+    }
+
+    .auth-image {
+        height: 200px;
+    }
+
+    .auth-image h2 {
+        font-size: 20px;
+    }
+
+    .auth-image p {
+        font-size: 14px;
+    }
+}
